@@ -1,7 +1,7 @@
-package edu.famu.gametrackcode.Controller;
+package edu.famu.gametrack.Controller;
 
-import edu.famu.gametrackcode.Model.Post;
-import edu.famu.gametrackcode.Services.PostService;
+import edu.famu.gametrack.Model.Post;
+import edu.famu.gametrack.Services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

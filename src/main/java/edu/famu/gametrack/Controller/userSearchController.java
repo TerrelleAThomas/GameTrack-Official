@@ -1,7 +1,7 @@
-package edu.famu.gametrackcode.Controller;
+package edu.famu.gametrack.Controller;
 
-import edu.famu.gametrackcode.Model.userSearch;
-import edu.famu.gametrackcode.Services.userSearchService;
+import edu.famu.gametrack.Model.userSearch;
+import edu.famu.gametrack.Services.userSearchService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

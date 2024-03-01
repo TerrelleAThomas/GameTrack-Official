@@ -1,9 +1,10 @@
-package edu.famu.gametrackcode.Controller;
+package edu.famu.gametrack.Controller;
 
-import edu.famu.gametrackcode.Model.User;
-import edu.famu.gametrackcode.Services.UserService;
-import edu.famu.gametrackcode.Services.userSearchService;
-import edu.famu.gametrackcode.Utli.ErrorMessage;
+import edu.famu.gametrack.Model.User;
+import edu.famu.gametrack.Services.UserService;
+import edu.famu.gametrack.Services.userSearchService;
+import edu.famu.gametrack.Services.userSearchService;
+import edu.famu.gametrack.Utli.ErrorMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    private edu.famu.gametrackcode.Services.userSearchService userSearchService;
+    private edu.famu.gametrack.Services.userSearchService userSearchService;
 
     public UserController(UserService userService) {
         this.userService = userService;

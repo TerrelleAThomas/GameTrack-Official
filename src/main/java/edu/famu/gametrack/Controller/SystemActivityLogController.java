@@ -1,4 +1,4 @@
-package edu.famu.gametrackcode.Controller;
+package edu.famu.gametrack.Controller;
 
 public class SystemActivityLogController {
 }
