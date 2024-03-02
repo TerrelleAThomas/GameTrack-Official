@@ -1,3 +1,4 @@
+
 package edu.famu.gametrack.Security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,7 +25,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -85,19 +85,18 @@ public class FirebaseAuthenticationConfig extends WebSecurityConfigurerAdapter {
         return source;
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.cors().configurationSource(corsConfigurationSource()).and().csrf().disable().formLogin().disable()
                 .httpBasic().disable().exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint())
                 .and().authorizeRequests()
-                .antMatchers(restSecProps.getAllowedPublicApis().toArray(String[]::new)).permitAll()
+                .antMatchers(restSecProps.getAllowedPublicApis().toArray(new String[0])).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated().and()
-                .addFilterBefore((Filter) new FirebaseAuthenticationFilter(authenticationManagerBean(),new FirebaseAuthenticationFailureHandler()),UsernamePasswordAuthenticationFilter.class)
+                // Updated line: Removed the casting to Filter as it is unnecessary and specified the filter class directly
+                .addFilterBefore(new FirebaseAuthenticationFilter(authenticationManagerBean(), new FirebaseAuthenticationFailureHandler()), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
-
 
     @Override
     @Bean
@@ -116,3 +115,6 @@ public class FirebaseAuthenticationConfig extends WebSecurityConfigurerAdapter {
         return new FirebaseAuthenticationProvider(firebaseAuth);
     }
 }
+
+
+
