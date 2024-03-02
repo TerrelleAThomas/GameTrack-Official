@@ -1,0 +1,60 @@
+<mxfile host="app.diagrams.net" modified="2023-11-19T01:57:16.002Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="4FccDGgCex_Rur3wx-rh" version="22.1.3" type="device">
+  <diagram name="Page-1" id="k2N0Sc0Yj6xWVdl68bSB">
+    <mxGraphModel dx="1131" dy="985" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="yorBMDZshFGCkbULuUfx-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yorBMDZshFGCkbULuUfx-1" target="yorBMDZshFGCkbULuUfx-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yorBMDZshFGCkbULuUfx-6" value="Select Post to comment on" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="yorBMDZshFGCkbULuUfx-5">
+          <mxGeometry x="0.5426" relative="1" as="geometry">
+            <mxPoint x="-53" y="26" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yorBMDZshFGCkbULuUfx-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="yorBMDZshFGCkbULuUfx-1" target="yorBMDZshFGCkbULuUfx-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yorBMDZshFGCkbULuUfx-8" value="Write comment" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="yorBMDZshFGCkbULuUfx-7">
+          <mxGeometry x="-0.2957" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yorBMDZshFGCkbULuUfx-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="yorBMDZshFGCkbULuUfx-1" target="yorBMDZshFGCkbULuUfx-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="515" y="400" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="165" y="500" />
+              <mxPoint x="517" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yorBMDZshFGCkbULuUfx-10" value="Send comment" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="yorBMDZshFGCkbULuUfx-9">
+          <mxGeometry x="-0.2589" y="-2" relative="1" as="geometry">
+            <mxPoint x="-18" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yorBMDZshFGCkbULuUfx-1" value="Registered User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="105" y="430" width="60" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yorBMDZshFGCkbULuUfx-2" value="Comment on Post" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="415" y="280" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="yorBMDZshFGCkbULuUfx-3" value="D1" style="html=1;dashed=0;whiteSpace=wrap;shape=mxgraph.dfd.dataStoreID;align=left;spacingLeft=3;points=[[0,0],[0.5,0],[1,0],[0,0.5],[1,0.5],[0,1],[0.5,1],[1,1]];" vertex="1" parent="1">
+          <mxGeometry x="645" y="510" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yorBMDZshFGCkbULuUfx-4" value="Posts" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="685" y="510" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yorBMDZshFGCkbULuUfx-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.276;entryY=-0.1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="yorBMDZshFGCkbULuUfx-2" target="yorBMDZshFGCkbULuUfx-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yorBMDZshFGCkbULuUfx-12" value="Update Comments" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="yorBMDZshFGCkbULuUfx-11">
+          <mxGeometry x="-0.5556" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

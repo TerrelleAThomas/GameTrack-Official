@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net" modified="2023-11-19T01:58:38.712Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="9FLw6wjK0TWjm6umN9pS" version="22.1.3" type="device">
+  <diagram name="Page-1" id="9hHy9nxmmyu1ylVWlxky">
+    <mxGraphModel dx="1131" dy="985" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bIfPa3pudN86Qw4J8vRz-3" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="bIfPa3pudN86Qw4J8vRz-1" target="bIfPa3pudN86Qw4J8vRz-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bIfPa3pudN86Qw4J8vRz-4" value="Selects &quot;Connect&quot; or &quot;Find Players&quot;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="bIfPa3pudN86Qw4J8vRz-3">
+          <mxGeometry x="0.0118" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bIfPa3pudN86Qw4J8vRz-1" value="Registered User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="212" y="449.92" width="50" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="bIfPa3pudN86Qw4J8vRz-2" value="Find Friends" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="517" y="139.92" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="bIfPa3pudN86Qw4J8vRz-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="bIfPa3pudN86Qw4J8vRz-2" target="bIfPa3pudN86Qw4J8vRz-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bIfPa3pudN86Qw4J8vRz-6" value="Analyzes User game history" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="bIfPa3pudN86Qw4J8vRz-5">
+          <mxGeometry x="0.4794" y="6" relative="1" as="geometry">
+            <mxPoint x="9" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bIfPa3pudN86Qw4J8vRz-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="bIfPa3pudN86Qw4J8vRz-2" target="bIfPa3pudN86Qw4J8vRz-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bIfPa3pudN86Qw4J8vRz-9" value="Provides User with Players to Accept or Deny" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="bIfPa3pudN86Qw4J8vRz-8">
+          <mxGeometry x="-0.1978" relative="1" as="geometry">
+            <mxPoint x="82" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

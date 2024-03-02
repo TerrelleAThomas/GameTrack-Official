@@ -1,0 +1,42 @@
+<mxfile host="app.diagrams.net" modified="2023-11-19T01:08:44.156Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="j0lw2IzqtfDmkjnwnsPl" version="22.1.3" type="device">
+  <diagram name="Page-1" id="LGSh0Oa-oMCUw7ppDM3R">
+    <mxGraphModel dx="1050" dy="914" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vB0oBZuCRzJto8Szv0ET-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="vB0oBZuCRzJto8Szv0ET-1" target="vB0oBZuCRzJto8Szv0ET-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="323" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vB0oBZuCRzJto8Szv0ET-9" value="Plays games" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="vB0oBZuCRzJto8Szv0ET-8">
+          <mxGeometry x="-0.4124" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vB0oBZuCRzJto8Szv0ET-1" value="Registered User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="203" y="420" width="60" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="vB0oBZuCRzJto8Szv0ET-7" value="Game Tracking" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="528" y="150" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vB0oBZuCRzJto8Szv0ET-10" value="D1" style="html=1;dashed=0;whiteSpace=wrap;shape=mxgraph.dfd.dataStoreID;align=left;spacingLeft=3;points=[[0,0],[0.5,0],[1,0],[0,0.5],[1,0.5],[0,1],[0.5,1],[1,1]];" vertex="1" parent="1">
+          <mxGeometry x="538" y="480" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vB0oBZuCRzJto8Szv0ET-11" value="User Data" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="558" y="480" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vB0oBZuCRzJto8Szv0ET-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.384;entryY=0.057;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="vB0oBZuCRzJto8Szv0ET-7" target="vB0oBZuCRzJto8Szv0ET-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vB0oBZuCRzJto8Szv0ET-13" value="User Game Progress" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="vB0oBZuCRzJto8Szv0ET-12">
+          <mxGeometry x="-0.2054" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
