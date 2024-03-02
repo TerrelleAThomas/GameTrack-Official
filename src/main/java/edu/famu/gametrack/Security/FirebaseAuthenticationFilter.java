@@ -17,8 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -26,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class FirebaseAuthenticationFilter extends OncePerRequestFilter {
+public class FirebaseAuthenticationFilter extends OncePerRequestFilter implements Filter {
 
 
     private AuthenticationManager authenticationManager;
@@ -39,7 +38,7 @@ public class FirebaseAuthenticationFilter extends OncePerRequestFilter {
 
     }
 
-    @Override
+
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String authToken = extractAuthenticationTokenFromRequest(request);
@@ -98,6 +97,11 @@ public class FirebaseAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain) throws jakarta.servlet.ServletException, IOException {
+
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
     }
 }

@@ -1,9 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import AboutUs from './Gamer/AboutUs';
 import Contact from "./Gamer/Contact";
 import Search from "./Gamer/Search";
-import {AuthProvider} from "./pages/AuthContext";
+import { AuthProvider } from "./pages/AuthContext";
 import IndiviualPost from "./Gamer/IndiviualPost";
 import SignUp from "./SignUp";
 import Login from "./Login";
@@ -27,55 +27,48 @@ import SiteAdminRoute from "./Private Routes/SiteAdminRoute";
 import Logout from "./LogOut";
 import NotAuthorizedPage from "./NotAuthorized";
 
-
 function App() {
-  return (
-      <AuthProvider>
+    return (
+        <AuthProvider>
+            <Router>
+                <Routes>
+                    <Route element={<SignUp />} path='/signup'/>
+                    <Route element={<Login />} path='/login'/>
+                    <Route element={<SignUp />} path='/'/>
 
-        <Router>
+                    <Route element={<UserRoute />}>
+                        <Route element={<AboutUs />} path='User' />
+                        <Route element={<Pairing />} path='pairing' />
+                        <Route element={<Search />} path='search' />
+                        <Route element={<PostPage />} path='post' />
+                        <Route element={<Contact />} path='contact' />
+                        <Route element={<Message />} path='message' />
+                        <Route element={<UserProfile />} path='Profile' />
+                        <Route element={<FriendshipPage />} path='Friendship' />
+                        <Route element={<IndiviualPost />} path='Individual' />
+                        <Route element={<RecommendedGames />} path='Games' />
+                        <Route element={<Logout />} path='LogOut' />
+                    </Route>
 
-          <Routes>
+                    <Route element={<SiteAdminRoute />}>
+                        <Route element={<SiteAdminDashboard />} path='/Site' />
+                        <Route element={<AnnouncementPage />} path='/Announcement' />
+                        <Route element={<GameManagement />} path='/Game' />
+                        <Route element={<PostCommentModeration />} path='Moderation' />
+                        {/* Define other routes here */}
+                    </Route>
 
-              <Route element={<Login />} path='/'/>
-            <Route element={<Login />} path='/login'/>
-            <Route element={<SignUp />} path='/signup'/>
-
-            <Route element={<UserRoute />}>
-              <Route element={<AboutUs />} path='User' />
-              <Route element={<Pairing />} path='pairing' />
-              <Route element={<Search />} path='search' />
-              <Route element={<PostPage />} path='post' />
-              <Route element={<Contact />} path='contact' />
-              <Route element={<Message />} path='message' />
-              <Route element={<UserProfile />} path='Profile' />
-              <Route element={<FriendshipPage />} path='Friendship' />
-              <Route element={<IndiviualPost />} path='Individual' />
-              <Route element={<RecommendedGames />} path='Games' />
-              <Route element={<Logout />} path='LogOut' />
-            </Route>
-
-
-              <Route element={<SiteAdminRoute />}>
-              <Route element={<SiteAdminDashboard />} path='/Site' />
-              <Route element={<AnnouncementPage />} path='/Announcement' />
-              <Route element={<GameManagement />} path='/Game' />
-              <Route element={<PostCommentModeration />} path='Moderation' />
-              {/* Define other routes here */}
-              </Route>
-
-
-             <Route element={<AdminPrivateRoute />}>
-              <Route element={<AdminDashboard />} path='/AdminDashboard' />
-              <Route element={<UserManagement />} path='/UserManagement' />
-              <Route element={<AdminReports />} path='/Reports' />
-              <Route element={<UserDatabase />} path='Database' />
-              {/* Define other routes here */}
-             </Route>
-
-          </Routes>
-        </Router>
-      </AuthProvider>
-  );
+                    <Route element={<AdminPrivateRoute />}>
+                        <Route element={<AdminDashboard />} path='/AdminDashboard' />
+                        <Route element={<UserManagement />} path='/UserManagement' />
+                        <Route element={<AdminReports />} path='/Reports' />
+                        <Route element={<UserDatabase />} path='Database' />
+                        {/* Define other routes here */}
+                    </Route>
+                </Routes>
+            </Router>
+        </AuthProvider>
+    );
 }
 
 export default App;

@@ -1,6 +1,5 @@
 package edu.famu.gametrack.Security;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
 import edu.famu.gametrack.Services.FirebaseUserDetailsService;
@@ -113,4 +112,3 @@ public class FirebaseAuthenticationConfig extends WebSecurityConfigurerAdapter {
         return new FirebaseAuthenticationProvider(firebaseAuth);
     }
 }
-
