@@ -2,13 +2,13 @@ package edu.famu.gametrack.Security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
+import javax.servlet.Filter;
 import edu.famu.gametrack.Services.FirebaseUserDetailsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,7 +25,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import javax.servlet.Filter;
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
@@ -94,9 +94,10 @@ public class FirebaseAuthenticationConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers(restSecProps.getAllowedPublicApis().toArray(String[]::new)).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated().and()
-                .addFilterBefore((Filter) new FirebaseAuthenticationFilter(authenticationManagerBean(),new FirebaseAuthenticationFailureHandler()), (Class<? extends Filter>) UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore((Filter) new FirebaseAuthenticationFilter(authenticationManagerBean(),new FirebaseAuthenticationFailureHandler()),UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
+
 
     @Override
     @Bean
