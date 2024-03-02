@@ -5,10 +5,6 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import edu.famu.gametrack.Utli.JwtUtil;
 import io.jsonwebtoken.Claims;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +17,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,17 +28,19 @@ import java.util.Collection;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class FirebaseAuthenticationFilter extends OncePerRequestFilter {
 
-    private final FirebaseAuthenticationFailureHandler failureHandler;
-    private final AuthenticationManager authenticationManager;
 
-    public FirebaseAuthenticationFilter(AuthenticationManager authenticationManager, FirebaseAuthenticationFailureHandler failureHandler) {
-        this.failureHandler = failureHandler;
+    private AuthenticationManager authenticationManager;
+    private FirebaseAuthenticationFailureHandler failureHandler;
+
+    public FirebaseAuthenticationFilter( AuthenticationManager authenticationManager, FirebaseAuthenticationFailureHandler failureHandler) {
+
         this.authenticationManager = authenticationManager;
+        this.failureHandler = failureHandler;
+
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String authToken = extractAuthenticationTokenFromRequest(request);
 
@@ -50,8 +51,11 @@ public class FirebaseAuthenticationFilter extends OncePerRequestFilter {
                 authorities.add(new SimpleGrantedAuthority("USER"));
                 Authentication authentication = new UsernamePasswordAuthenticationToken(uid, null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-            } else {
+            }
+            else
+            {
                 authToken = extractAuthorizationTokenFromRequest(request);
+
                 if (StringUtils.hasText(authToken)) {
                     Claims claims = JwtUtil.getClaimsFromToken(authToken);
                     String uid = claims.getSubject();
@@ -62,14 +66,9 @@ public class FirebaseAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (AuthenticationException e) {
-            // Handle Firebase Auth exceptions separately if needed
-            failureHandler.onAuthenticationFailure(request, response, e);
+            failureHandler.onAuthenticationFailure((jakarta.servlet.http.HttpServletRequest) request, (jakarta.servlet.http.HttpServletResponse) response, e);
             return;
-        } /*catch (Exception e) {
-            // General exception handling, including AuthenticationException
-            failureHandler.onAuthenticationFailure(request, response, new ServletException("Authentication error", e));
-            return;
-        }*/ catch (FirebaseAuthException e) {
+        } catch (FirebaseAuthException e) {
             throw new RuntimeException(e);
         }
 
@@ -77,14 +76,28 @@ public class FirebaseAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private String extractAuthenticationTokenFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
+        String authToken = request.getHeader("Authorization");
+        if (StringUtils.hasText(authToken) && authToken.startsWith("Bearer ")) {
+            return authToken.substring(7);
         }
         return null;
     }
 
     private String extractAuthorizationTokenFromRequest(HttpServletRequest request) {
         return request.getHeader("X-Auth-Token");
+    }
+
+
+    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
+
+    public void setAuthenticationFailureHandler(FirebaseAuthenticationFailureHandler failureHandler) {
+        this.failureHandler = failureHandler;
+    }
+
+    @Override
+    protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain) throws jakarta.servlet.ServletException, IOException {
+
     }
 }

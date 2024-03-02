@@ -5,7 +5,7 @@ spring:
       max-file-size: 10MB
       max-request-size: 215MB
   application:
-    name: CampusQuestApplication
+    name: GameTrackApplication
 
 security:
   allow-credentials: true
@@ -38,12 +38,14 @@ security:
   allowed-public-apis:
     - /favicon.ico
     - /
+    - /api/special/**
     - /api/login
+    - /api/account/**
+    - /api/user/**
+    - /api/logout
     - /api/register
-    - /logout
     - /css/**
     - /js/**
-    - /api/event/{eventId}
     - /api/comments
     - /api/posts
     - /api/user

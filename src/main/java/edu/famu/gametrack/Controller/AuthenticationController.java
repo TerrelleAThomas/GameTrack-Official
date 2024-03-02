@@ -13,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import edu.famu.gametrack.Services.UserService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -69,7 +66,7 @@ public class AuthenticationController {
             return ResponseEntity.ok(returnVal);
         } catch (FirebaseAuthException e) {
             logger.error("Failed to get users", e);
-            returnVal.put("error", e.getStackTrace().toString());
+            returnVal.put("error", Arrays.toString(e.getStackTrace()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(returnVal);
         }
     }
@@ -90,7 +87,7 @@ public class AuthenticationController {
         } catch (FirebaseAuthException e) {
             logger.error("Failed to update user", e);
             Map<String, Object> returnVal = new HashMap<>();
-            returnVal.put("error", e.getStackTrace().toString());
+            returnVal.put("error", Arrays.toString(e.getStackTrace()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(returnVal);
         }
     }

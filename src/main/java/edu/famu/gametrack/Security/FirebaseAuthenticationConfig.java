@@ -1,5 +1,6 @@
 package edu.famu.gametrack.Security;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
 import edu.famu.gametrack.Services.FirebaseUserDetailsService;
@@ -82,6 +83,7 @@ public class FirebaseAuthenticationConfig extends WebSecurityConfigurerAdapter {
         return source;
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -110,9 +112,5 @@ public class FirebaseAuthenticationConfig extends WebSecurityConfigurerAdapter {
     public FirebaseAuthenticationProvider authenticationProvider() {
         return new FirebaseAuthenticationProvider(firebaseAuth);
     }
-
-    @Bean
-    public FirebaseAuthenticationFailureHandler firebaseAuthenticationFailureHandlerBean() {
-        return new FirebaseAuthenticationFailureHandler();
-    }
 }
+
