@@ -1,49 +1,51 @@
-import React, { useEffect } from 'react';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios'; // Make sure axios is installed using `npm install axios`
 
-export default function PostCommentModeration () {
+export default function PostCommentModeration() {
+    const [comments, setComments] = useState([]);
+
     useEffect(() => {
         fetchComments();
     }, []);
 
-    function fetchComments() {
-        // Replace this with your Firebase logic to fetch comments/posts
-        // Example:
-        // firebase.database().ref('comments').on('value', (snapshot) => {
-        //     snapshot.forEach((childSnapshot) => {
-        //         const commentData = childSnapshot.val();
-        //         const commentId = childSnapshot.key;
-        //         // Create HTML elements dynamically and append to the comments-container
-        //         const commentElement = `<div className="post-comment-card">
-        //                                    <h5>{commentData.userName}</h5>
-        //                                    <p>{commentData.content}</p>
-        //                                    <small>Posted on: {commentData.postedDate}</small>
-        //                                    <div className="action-buttons">
-        //                                        <button className="btn btn-danger" onClick={() => removePostComment(commentId)}>Remove</button>
-        //                                        <button className="btn btn-warning" onClick={() => flagPostComment(commentId)}>Flag</button>
-        //                                    </div>
-        //                                </div>`;
-        //         $('#comments-container').append(commentElement);
-        //     });
-        // });
-    }
+    const fetchComments = async () => {
+        try {
+            // Replace with your actual endpoint to fetch comments
+            const response = await axios.get('/api/comments');
+            setComments(response.data);
+        } catch (error) {
+            notifyUser('Error fetching comments: ' + error.message);
+        }
+    };
 
-    function removePostComment(commentId) {
-        // Logic to remove the post/comment
-        // notifyUser('Your post/comment has been removed.');
-    }
+    const removePostComment = async (commentId) => {
+        try {
+            await axios.delete(`/api/comments/${commentId}`);
+            setComments(comments.filter(comment => comment.id !== commentId));
+            notifyUser('The post/comment has been removed.');
+        } catch (error) {
+            notifyUser('Error removing post/comment: ' + error.message);
+        }
+    };
 
-    function flagPostComment(commentId) {
-        // Logic to flag the post/comment
-        // Move the flagged content to the flagged-list section
-        // notifyUser('Your post/comment has been flagged for review.');
-    }
+    const flagPostComment = async (commentId) => {
+        try {
+            const flagData = {
+                commentId: commentId,
+                // Add additional data as needed
+            };
+            await axios.post('/api/flags', flagData);
+            // Optionally update state to reflect the flagged comment
+            notifyUser('The post/comment has been flagged for review.');
+        } catch (error) {
+            notifyUser('Error flagging post/comment: ' + error.message);
+        }
+    };
 
-    function notifyUser(message) {
+    const notifyUser = (message) => {
         alert(message);
-        // You can customize the notification method (e.g., modal, toast) based on your UI design
-    }
+        // Customize this with a more sophisticated notification system if desired
+    };
 
     return (
         <div className="container">
@@ -52,7 +54,17 @@ export default function PostCommentModeration () {
                     <div className="moderation-list">
                         <h2 className="text-center mb-4">Post/Comment Moderation</h2>
                         <div id="comments-container">
-                            {/* Comments fetched from Firebase will be inserted here */}
+                            {comments.map((comment) => (
+                                <div className="post-comment-card" key={comment.id}>
+                                    <h5>{comment.userName}</h5>
+                                    <p>{comment.content}</p>
+                                    <small>Posted on: {comment.postedDate}</small>
+                                    <div className="action-buttons">
+                                        <button className="btn btn-danger" onClick={() => removePostComment(comment.id)}>Remove</button>
+                                        <button className="btn btn-warning" onClick={() => flagPostComment(comment.id)}>Flag</button>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
@@ -68,7 +80,7 @@ export default function PostCommentModeration () {
                         {/* Removed content will be displayed here */}
                     </div>
 
-                    <a href="admin-dashboard.html" className="btn btn-secondary btn-block">Back to Admin Dashboard</a>
+                    <a href="SiteAdminDashboard /" className="btn btn-secondary btn-block">Back to Admin Dashboard</a>
                 </div>
             </div>
         </div>

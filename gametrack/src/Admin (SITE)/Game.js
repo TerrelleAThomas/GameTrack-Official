@@ -1,21 +1,34 @@
 import React from 'react';
+import axios from 'axios'; // Make sure to install axios with `npm install axios` or `yarn add axios`
 
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+export default function GameManagement() {
+    const deleteGame = async (gameId) => {
+        try {
+            await axios.delete(`/api/games/${gameId}`);
+            removeGameCard(gameId);
+            notifyUser('The game has been deleted.');
+        } catch (error) {
+            notifyUser('Error deleting the game: ' + error.message);
+        }
+    };
 
-export default function GameManagement () {
-    const deleteGame = (event) => {
-        const gameCard = event.target.closest('.game-card');
+    const removeGameCard = (gameId) => {
+        const gameCard = document.getElementById(`game-card-${gameId}`);
         if (gameCard) {
             gameCard.remove();
-            notifyUser('The game has been deleted.');
         }
     };
 
     const notifyUser = (message) => {
-        alert(message);
-        // You can customize the notification method (e.g., modal, toast) based on your UI design
+        alert(message); // Customize notification as needed
     };
+
+    // Replace this with actual game data retrieval logic
+    const games = [
+        // This is a placeholder. Your actual game data would come from state, props, or an API call
+        { id: '1', title: 'Game Title', description: 'Description of the game...', releaseDate: 'January 1, 2022' },
+        // ... other games
+    ];
 
     return (
         <div style={{ backgroundImage: "url('game_management_bg.jpg')", backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh', margin: 0, padding: 0, color: '#fff' }}>
@@ -33,18 +46,18 @@ export default function GameManagement () {
                                 </div>
                             </div>
 
-                            {/* Example Game Card (Repeat for each game) */}
-                            <div className="game-card">
-                                <h5>Game Title</h5>
-                                <p>Description of the game goes here...</p>
-                                <small>Release Date: January 1, 2022</small>
-                                <div className="text-right">
-                                    <button className="btn btn-danger" onClick={deleteGame}>Delete</button>
+                            {/* Game Cards */}
+                            {games.map(game => (
+                                <div className="game-card" id={`game-card-${game.id}`} key={game.id}>
+                                    <h5>{game.title}</h5>
+                                    <p>{game.description}</p>
+                                    <small>Release Date: {game.releaseDate}</small>
+                                    <div className="text-right">
+                                        <button className="btn btn-danger" onClick={() => deleteGame(game.id)}>Delete</button>
+                                    </div>
                                 </div>
-                            </div>
-                            {/* End of Example Game Card */}
+                            ))}
 
-                            {/* Repeat the above card structure for each game */}
                         </div>
 
                         <a href="admin-dashboard.html" className="btn btn-secondary btn-block">Back to Admin Dashboard</a>

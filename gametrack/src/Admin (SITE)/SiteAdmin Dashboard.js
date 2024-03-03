@@ -41,13 +41,13 @@ export default function SiteAdminDashboard() {
                         <div className="collapse navbar-collapse" id="navbarNav">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#game" onClick={handleNavLinkClick}>Game</a>
+                                    <a className="nav-link" href="/GameManagement" onClick={handleNavLinkClick}>Game</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#postCommentModeration" onClick={handleNavLinkClick}>Moderation</a>
+                                    <a className="nav-link" href="/PostCommentModeration" onClick={handleNavLinkClick}>Moderation</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#announcement" onClick={handleNavLinkClick}>Announcement</a>
+                                    <a className="nav-link" href="/AnnouncementPage" onClick={handleNavLinkClick}>Announcement</a>
                                 </li>
                             </ul>
                         </div>

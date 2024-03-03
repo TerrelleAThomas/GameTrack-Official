@@ -14,7 +14,7 @@ import java.text.ParseException;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Announcements {
+public class Announcement {
     @DocumentId
 
     protected @Nullable String AnnouncementId;

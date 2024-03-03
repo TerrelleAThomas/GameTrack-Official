@@ -35,4 +35,6 @@ public class FirebaseAuthenticationFailureHandler implements AuthenticationFailu
     }
 
 
+    public void onAuthenticationFailure(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response, AuthenticationException e) {
+    }
 }

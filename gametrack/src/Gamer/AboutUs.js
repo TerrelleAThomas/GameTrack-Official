@@ -52,7 +52,7 @@ export default function AboutUs () {
                         <h4>Join the GamTrack Community</h4>
                         <p>Embark on a journey of shared experiences, thrilling victories, and unforgettable moments. GameTrackr is more than an application; it's a community where gamers unite. Join us and let's level up together.</p>
                         <div className="center-btn">
-                            <a href="#" className="btn btn-primary purple-btn">Let's Start</a> {/* Replace # with the actual link */}
+                            <a href="/Pairing" className="btn btn-primary purple-btn">Let's Start</a> {/* Replace # with the actual link */}
                         </div>
                     </div>
                 </div>
