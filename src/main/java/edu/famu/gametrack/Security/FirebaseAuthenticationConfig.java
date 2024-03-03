@@ -94,7 +94,7 @@ public class FirebaseAuthenticationConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(restSecProps.getAllowedPublicApis().toArray(new String[0])).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated().and()
                 // Updated line: Removed the casting to Filter as it is unnecessary and specified the filter class directly
-                .addFilterBefore(new FirebaseAuthenticationFilter(authenticationManagerBean(), new FirebaseAuthenticationFailureHandler()), (Class<? extends Filter>) UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new FirebaseAuthenticationFilter(authenticationManagerBean(), new FirebaseAuthenticationFailureHandler()), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
