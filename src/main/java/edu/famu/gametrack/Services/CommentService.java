@@ -11,8 +11,9 @@ public class CommentService {
 
     private Firestore db;
 
-    public CommentService() {
-        this.db = FirestoreClient.getFirestore();
+    public CommentService(Firestore db) {
+
+        this.db = db;
     }
 
     public Comment createComment(Comment comment) throws Exception {

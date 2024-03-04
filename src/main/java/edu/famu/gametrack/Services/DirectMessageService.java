@@ -12,8 +12,9 @@ public class DirectMessageService {
 
     private final Firestore db;
 
-    public DirectMessageService() {
-        this.db = FirestoreClient.getFirestore();
+    public DirectMessageService(Firestore db) {
+
+        this.db = db;
     }
 
     public Message createMessage(Message message) throws Exception {

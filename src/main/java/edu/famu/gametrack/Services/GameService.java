@@ -12,8 +12,8 @@ public class GameService {
 
     private final Firestore db;
 
-    public GameService() {
-        this.db = FirestoreClient.getFirestore();
+    public GameService(Firestore db) {
+        this.db = db;
     }
 
     public Game createGame(Game game) throws Exception {

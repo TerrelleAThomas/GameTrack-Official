@@ -11,8 +11,9 @@ public class FlagService {
 
     private final Firestore db;
 
-    public FlagService() {
-        this.db = FirestoreClient.getFirestore();
+    public FlagService(Firestore db) {
+
+        this.db = db;
     }
 
     public Flag createFlag(Flag flag) throws Exception {

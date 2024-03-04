@@ -12,8 +12,8 @@ public class AnnouncementService {
 
     private final Firestore db;
 
-    public AnnouncementService() {
-        this.db = FirestoreClient.getFirestore();
+    public AnnouncementService(Firestore db) {
+        this.db = db;
     }
 
     public Announcement createAnnouncement(Announcement announcement) throws Exception {

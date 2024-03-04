@@ -22,7 +22,7 @@ public class PostService {
     }
 
     public Post createPost(Post post) throws ExecutionException, InterruptedException {
-        DocumentReference docRef = db.collection("posts").document();
+        DocumentReference docRef = db.collection("Post").document();
         // Set creation and update timestamps
         post.getCreationDate(Instant.now());
         post.getUpdateDate(Instant.now());
@@ -33,7 +33,7 @@ public class PostService {
     }
 
     public Post getPost(String postId) throws ExecutionException, InterruptedException {
-        DocumentSnapshot documentSnapshot = db.collection("posts").document(postId).get().get();
+        DocumentSnapshot documentSnapshot = db.collection("Post").document(postId).get().get();
         if (documentSnapshot.exists()) {
             return documentSnapshot.toObject(Post.class);
         } else {
@@ -44,7 +44,7 @@ public class PostService {
     }
 
     public List<Post> getAllPosts() throws ExecutionException, InterruptedException {
-        ApiFuture<QuerySnapshot> querySnapshot = db.collection("posts").get();
+        ApiFuture<QuerySnapshot> querySnapshot = db.collection("Post").get();
         List<QueryDocumentSnapshot> documents = querySnapshot.get().getDocuments();
         List<Post> posts = new ArrayList<>();
         documents.forEach(doc -> posts.add(doc.toObject(Post.class)));
@@ -52,7 +52,7 @@ public class PostService {
     }
 
     public Post updatePost(String postId, Post post) throws ExecutionException, InterruptedException {
-        DocumentReference docRef = db.collection("posts").document(postId);
+        DocumentReference docRef = db.collection("Post").document(postId);
         // Update the updateTime to now
         post.getUpdateDate(Instant.now());
         docRef.set(post).get();
@@ -60,7 +60,7 @@ public class PostService {
     }
 
     public boolean deletePost(String postId) throws ExecutionException, InterruptedException {
-        db.collection("posts").document(postId).delete().get();
+        db.collection("Post").document(postId).delete().get();
         return true; // Or check for successful deletion if necessary
     }
 }

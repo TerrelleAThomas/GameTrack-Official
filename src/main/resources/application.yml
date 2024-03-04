@@ -38,18 +38,20 @@ security:
   allowed-public-apis:
     - /favicon.ico
     - /
-    - /api/special/**
     - /api/login
-    - /api/account/**
-    - /api/user/**
-    - /api/logout
     - /api/register
+    - /logout
     - /css/**
     - /js/**
-    - /api/comments
-    - /api/posts
-    - /api/user
-    - /api/usersearch
+    - /api/announcements/**
+    - /api/**
+    - /api/comments/**
+    - /api/messages/**
+    - /api/flags/**
+    - /api/games/**
+    - /api/posts/**
+    - /api/user/**
+    - /api/usersearch/**
   exposed-headers:
     - X-Xsrf-Token
     - X-Auth-Token
