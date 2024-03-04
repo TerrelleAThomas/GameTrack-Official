@@ -52,6 +52,10 @@ security:
     - /api/posts/**
     - /api/user/**
     - /api/usersearch/**
+    - /api/feedback/**
+    - /api/friendships/**
+    - /api/reports/**
+    - /api/interactions/**
   exposed-headers:
     - X-Xsrf-Token
     - X-Auth-Token

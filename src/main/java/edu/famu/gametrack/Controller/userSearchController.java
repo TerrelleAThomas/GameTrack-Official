@@ -1,17 +1,16 @@
 package edu.famu.gametrack.Controller;
 
-import edu.famu.gametrack.Model.userSearch;
 import edu.famu.gametrack.Services.userSearchService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.concurrent.ExecutionException;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/usersearch")
+@RequestMapping("/api/userSearch")
 public class userSearchController {
+
     private final userSearchService userSearchService;
 
     @Autowired
@@ -19,32 +18,13 @@ public class userSearchController {
         this.userSearchService = userSearchService;
     }
 
-    @PostMapping
-    public ResponseEntity<String> createUserSearch(@RequestBody userSearch userSearch) {
+    @GetMapping
+    public ResponseEntity<?> search(@RequestParam String query) {
         try {
-            userSearch createdUserSearch = userSearchService.createUserSearch(userSearch); // Adjust method call
-            return ResponseEntity.ok(String.valueOf(createdUserSearch));
-        } catch (ExecutionException | InterruptedException e) {
-            Thread.currentThread().interrupt(); // Properly handle InterruptedException
-            return ResponseEntity.status(500).body("Error processing request: " + e.getMessage());
-        }
-    }
-
-    @GetMapping("/{searchId}")
-    public ResponseEntity<?> getUserSearch(@PathVariable String searchId) {
-        try {
-            userSearch userSearch = userSearchService.getUserSearch(searchId); // Adjust method call
-            if (userSearch != null) {
-                return ResponseEntity.ok(userSearch);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (ExecutionException e) {
-            return ResponseEntity.status(500).body("Error retrieving user search: " + e.getMessage());
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // Properly handle InterruptedException
-            return ResponseEntity.status(500).body("Error retrieving user search: " + e.getMessage());
+            List<Object> results = userSearchService.searchForUsers(query);
+            return ResponseEntity.ok(results);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error performing search: " + e.getMessage());
         }
     }
 }
-

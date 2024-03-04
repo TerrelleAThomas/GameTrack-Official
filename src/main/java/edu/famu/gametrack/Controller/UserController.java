@@ -2,12 +2,12 @@ package edu.famu.gametrack.Controller;
 
 import edu.famu.gametrack.Model.User;
 import edu.famu.gametrack.Services.UserService;
-import edu.famu.gametrack.Services.userSearchService;
-import edu.famu.gametrack.Services.userSearchService;
 import edu.famu.gametrack.Utli.ErrorMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -17,29 +17,17 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    private edu.famu.gametrack.Services.userSearchService userSearchService;
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // Simplified to just get user by username or email
     @GetMapping("/search")
     public ResponseEntity<?> getUserByUsernameOrEmail(@RequestParam(name = "username", required = false) String username,
                                                       @RequestParam(name = "email", required = false) String email) {
         try {
-            if (username != null) {
-                User userByUsername = userService.getUserByUsername(username);
-                if (userByUsername != null) {
-                    return ResponseEntity.ok(userByUsername);
-                }
-            } else if (email != null) {
-                User userByEmail = userService.getUserByEmail(email);
-                if (userByEmail != null) {
-                    return ResponseEntity.ok(userByEmail);
-                }
-            }
-            return ResponseEntity.notFound().build();
+            User user = (username != null) ? userService.getUserByUsername(username) : userService.getUserByEmail(email);
+            return (user != null) ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
         } catch (Exception e) {
             logger.error("Error fetching user", e);
             return ResponseEntity.internalServerError().body(new ErrorMessage("Cannot fetch user", "UserService", e.getMessage()));
@@ -60,7 +48,9 @@ public class UserController {
     @DeleteMapping("/{username}")
     public ResponseEntity<?> deleteUser(@PathVariable("username") String username) {
         try {
-            userService.deleteUserByUsername(username);
+            if (!userService.deleteUserByUsername(username)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Access denied or user not found");
+            }
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             logger.error("Error deleting user", e);
@@ -68,17 +58,35 @@ public class UserController {
         }
     }
 
-    // Endpoint to update user status
-    @PutMapping("/updateStatus/{userId}")
-    public ResponseEntity<?> updateUserStatus(@PathVariable String userId, @RequestBody String status) {
+    // Method to activate a user
+    @PostMapping("/{username}/activate")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> activateUser(@PathVariable("username") String username) {
         try {
-            userSearchService.updateUserStatus(userId, status);
-            return ResponseEntity.ok().build();
+            boolean activated = userService.activateUserByUsername(username);
+            if (!activated) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
+            return ResponseEntity.ok("User activated successfully");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            logger.error("Error activating user", e);
+            return ResponseEntity.internalServerError().body("Error activating user");
         }
     }
 
-    // Endpoint to delete a user
-
+    // Method to deactivate a user
+    @PostMapping("/{username}/deactivate")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> deactivateUser(@PathVariable("username") String username) {
+        try {
+            boolean deactivated = userService.deactivateUserByUsername(username);
+            if (!deactivated) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
+            return ResponseEntity.ok("User deactivated successfully");
+        } catch (Exception e) {
+            logger.error("Error deactivating user", e);
+            return ResponseEntity.internalServerError().body("Error deactivating user");
+        }
+    }
 }

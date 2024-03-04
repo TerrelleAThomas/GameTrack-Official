@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import AboutUs from './Gamer/AboutUs';
 import Contact from "./Gamer/Contact";
 import Search from "./Gamer/Search";
@@ -26,6 +26,8 @@ import UserRoute from "./Private Routes/UserRoute";
 import SiteAdminRoute from "./Private Routes/SiteAdminRoute";
 import Logout from "./LogOut";
 import NotAuthorizedPage from "./NotAuthorized";
+import Feedback from "./Gamer/Feedback";
+import AdminInteractionPanel from "./Admin/AdminInteractionPanel";
 
 function App() {
     return (
@@ -42,6 +44,7 @@ function App() {
                         <Route element={<Search />} path='search' />
                         <Route element={<PostPage />} path='post' />
                         <Route element={<Contact />} path='contact' />
+                        <Route element={<Feedback />} path='feedback' />
                         <Route element={<Message />} path='message' />
                         <Route element={<UserProfile />} path='Profile' />
                         <Route element={<FriendshipPage />} path='Friendship' />
@@ -61,6 +64,7 @@ function App() {
                     <Route element={<AdminPrivateRoute />}>
                         <Route element={<AdminDashboard />} path='/AdminDashboard' />
                         <Route element={<UserManagement />} path='/UserManagement' />
+                        <Route element={<AdminInteractionPanel />} path='AdminPanel' />
                         <Route element={<AdminReports />} path='/Reports' />
                         <Route element={<UserDatabase />} path='Database' />
                         {/* Define other routes here */}

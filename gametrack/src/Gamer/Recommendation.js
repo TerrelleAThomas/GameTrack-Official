@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from 'react';
-// Import the necessary Firebase modules
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get } from 'firebase/database';
-import {firebaseConfig} from "../pages/FirebaseConfig";
+import axios from 'axios'; // Make sure axios is installed using `npm install axios`
 
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+const API_BASE_URL = 'http://localhost:8080/api/games'; // Update with the correct base URL of your backend
 
 export default function RecommendedGames() {
     const [games, setGames] = useState([]);
 
     useEffect(() => {
-        // Fetch game recommendations from Firebase
-        const gamesRef = ref(database, 'games');
-        get(gamesRef).then((snapshot) => {
-            if (snapshot.exists()) {
-                const data = snapshot.val();
-                const gameList = Object.values(data);
-                setGames(gameList);
-            } else {
-                console.log("No data available");
-            }
-        }).catch((error) => {
-            console.error(error);
-        });
+        fetchGames();
     }, []);
+
+    const fetchGames = async () => {
+        try {
+            const response = await axios.get(API_BASE_URL);
+            setGames(response.data);
+        } catch (error) {
+            console.error('Error fetching games:', error);
+        }
+    };
 
     return (
         <div className="container mt-5">
@@ -34,13 +25,16 @@ export default function RecommendedGames() {
             <div className="row" id="gameList">
                 {games.map((game, index) => (
                     <div key={index} className="col-lg-4 col-md-6 mb-4">
-                        <div className="card">
-                            <img src={game.image} className="card-img-top" alt={game.title} />
-                            <div className="card-body">
+                        <div className="card h-100">
+                            {/* Assuming 'image' would be a URL to the game's image */}
+                            <img src={game.image || 'placeholder-image-url.jpg'} className="card-img-top" alt={game.title} />
+                            <div className="card-body d-flex flex-column">
                                 <h5 className="card-title">{game.title}</h5>
-                                <p className="card-text">Release Date: {game.releaseDate}</p>
-                                <p className="card-text">Genre: {game.genre}</p>
-                                <button className="btn btn-primary">View Details</button>
+                                {/* Add a check for each field in case it's not provided */}
+                                {game.description && <p className="card-text">{game.description}</p>}
+                                {game.genre && <p className="card-text">Genre: {game.genre}</p>}
+                                {game.releaseDate && <p className="card-text">Release Date: {new Date(game.releaseDate).toLocaleDateString()}</p>}
+                                {/* Buttons or other interactive elements can go here */}
                             </div>
                         </div>
                     </div>

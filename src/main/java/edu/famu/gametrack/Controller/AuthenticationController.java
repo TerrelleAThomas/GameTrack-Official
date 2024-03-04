@@ -45,7 +45,7 @@ public class AuthenticationController {
             String uid = usersService.getUserByEmail(email).get_Id();
             Map<String, Object> updates = new HashMap<>();
             updates.put("isActive", set);
-            usersService.updateUser(uid, updates);
+            usersService.updateUserByUsername(uid, updates);
 
             return ResponseEntity.ok(set);
         } catch (FirebaseAuthException | ExecutionException | InterruptedException e) {

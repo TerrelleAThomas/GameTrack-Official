@@ -1,38 +1,40 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 
-export default function UserProfilePage () {
 
-    // Event handler functions
-    const changeNavbarColor = () => {
-        // You can customize the color here
-        document.querySelector('.navbar').style.backgroundColor = '#007bff';
-    };
 
-    const confirmDeleteAccount = () => {
+export default function UserProfilePage() {
+    // State management for user data and navbar color
+    const [user, setUser] = useState({
+        name: "User Name", // Placeholder, should be replaced with actual user data
+        email: "user@example.com", // Placeholder, should be replaced with actual user data
+    });
+    const [navbarColor, setNavbarColor] = useState("#343a40"); // Default to dark theme
+
+    // Event handlers
+    const changeNavbarColor = useCallback(() => {
+        setNavbarColor("#007bff"); // Example: changing to a blue theme
+    }, []);
+
+    const confirmDeleteAccount = useCallback(() => {
         const confirmMessage = "Are you sure you want to delete your account?";
         if (window.confirm(confirmMessage)) {
-            // Implement account deletion logic here
             alert("Account deleted successfully!");
-
-            // Redirect to the sign-up page after account deletion
-            window.location.href = 'signup.html';
+            history.push('/signup'); // Redirecting to the signup page
         } else {
             alert("Account deletion canceled.");
-            // Additional actions when the user cancels the account deletion can be added here
         }
-    };
+    }, [history]);
 
-    const redirectToUserProfile = (friendName) => {
-        // Redirect to the user profile page based on the friend's name
-        window.location.href = 'userProfile.html?name=' + friendName;
-    };
+    const redirectToUserProfile = useCallback((friendName) => {
+        // Redirecting to the signup page with a friend's name as a query (example usage)
+        history.push(`/signup?name=${encodeURIComponent(friendName)}`);
+    }, [history]);
 
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <nav className="navbar navbar-expand-lg navbar-dark fixed-top" style={{ backgroundColor: navbarColor }}>
                 <a className="navbar-brand" href="#">Gamer Network</a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
@@ -44,9 +46,11 @@ export default function UserProfilePage () {
                             <a className="nav-link" href="#">Profile</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#" onClick={changeNavbarColor}>Pairing</a>
+                            <button className="nav-link btn btn-link" onClick={changeNavbarColor} style={{color: 'inherit', padding: 0, border: 'none', background: 'none'}}>Pairing</button>
                         </li>
-                        {/* More nav items */}
+                        <li className="nav-item">
+                            <a className="nav-link" href="#" onClick={() => redirectToUserProfile(user.name)}>Friend Profile</a>
+                        </li>
                         <li className="nav-item ml-2">
                             <a className="nav-link" href="#">Logout</a>
                         </li>
@@ -54,14 +58,14 @@ export default function UserProfilePage () {
                 </div>
             </nav>
 
-            <header className="profile-header">
+            <header className="profile-header mt-5 pt-3"> {/* Adjusted margin and padding to account for fixed navbar */}
                 <img src="https://placekitten.com/150/150" alt="Profile Avatar" className="profile-avatar" />
-                <h2>User Name</h2>
-                <p>Email: user@example.com</p>
+                <h2>{user.name}</h2>
+                <p>Email: {user.email}</p>
             </header>
 
             <div className="container mt-4 mb-4">
-                {/* Main content */}
+                <div>Main content goes here</div>
             </div>
 
             <div className="container">
@@ -71,5 +75,4 @@ export default function UserProfilePage () {
             </div>
         </div>
     );
-
 }

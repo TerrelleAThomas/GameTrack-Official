@@ -20,4 +20,19 @@ public class User {
     private boolean isSiteAdmin;
     private String password;
     private String username;
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public void setSiteAdmin(boolean siteAdmin) {
+        isSiteAdmin = siteAdmin;
+    }
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public boolean isSiteAdmin() {
+        return isSiteAdmin;
+    }
 }

@@ -7,6 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+
 @RestController
 @RequestMapping("/api/flags")
 public class FlagController {
@@ -36,6 +40,22 @@ public class FlagController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving flag: " + e.getMessage());
         }
+    }
+
+    @PostMapping
+    public ResponseEntity<?> flagComment(@RequestBody Long commentId) {
+        try {
+            String flag = flagService.flagComment(String.valueOf(commentId));
+            return ResponseEntity.ok(flag);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error flagging comment: " + e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Map<String, Object>>> getAllFlaggedComments() throws ExecutionException, InterruptedException {
+        List<Map<String, Object>> flags = flagService.getFlaggedComments();
+        return ResponseEntity.ok(flags);
     }
 
     // Additional endpoints for updating, deleting, and listing flags can be added here.

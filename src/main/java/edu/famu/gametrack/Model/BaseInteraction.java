@@ -18,6 +18,7 @@ public class BaseInteraction {
     protected @Nullable Timestamp dateUpdated;
     protected @Nullable Timestamp dateViewed;
 
-
-
+    public void setId(@Nullable String id) {
+        Id = id;
+    }
 }
