@@ -23,7 +23,16 @@ public class BaseComment {
     protected @Nullable Timestamp UpdateDate;
     protected String content;
 
+    public void setCreationDate(String creationDate) {
+        CreationDate = Timestamp.parseTimestamp(creationDate);
+    }
 
+    public void setDeleteDate(String deleteDate) {
+        DeleteDate = Timestamp.parseTimestamp(deleteDate);
+    }
 
+    public void setUpdateDate(String updateDate) {
+        UpdateDate = Timestamp.parseTimestamp(updateDate);
+    }
 }
 

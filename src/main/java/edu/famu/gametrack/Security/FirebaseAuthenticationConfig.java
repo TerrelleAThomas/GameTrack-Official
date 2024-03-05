@@ -1,10 +1,9 @@
-
 package edu.famu.gametrack.Security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
-import javax.servlet.Filter;
 import edu.famu.gametrack.Services.FirebaseUserDetailsService;
+import jakarta.servlet.Filter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -31,7 +31,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings("ALL")
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
@@ -87,14 +86,12 @@ public class FirebaseAuthenticationConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.cors().configurationSource(corsConfigurationSource()).and().csrf().disable().formLogin().disable()
                 .httpBasic().disable().exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint())
                 .and().authorizeRequests()
                 .antMatchers(restSecProps.getAllowedPublicApis().toArray(new String[0])).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated().and()
-                // Updated line: Removed the casting to Filter as it is unnecessary and specified the filter class directly
-                .addFilterBefore(new FirebaseAuthenticationFilter(authenticationManagerBean(), new FirebaseAuthenticationFailureHandler()), FirebaseAuthenticationFilter.class)
+                .addFilterBefore(new FirebaseAuthenticationFilter(authenticationManagerBean(), new FirebaseAuthenticationFailureHandler()), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
@@ -115,6 +112,3 @@ public class FirebaseAuthenticationConfig extends WebSecurityConfigurerAdapter {
         return new FirebaseAuthenticationProvider(firebaseAuth);
     }
 }
-
-
-

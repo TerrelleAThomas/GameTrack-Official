@@ -31,10 +31,10 @@ public class FirebaseAuthenticationFailureHandler implements AuthenticationFailu
 
         // Write the error message to the response body
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(response.getWriter(), new ErrorMessage("Authentication failed","", null));
+        objectMapper.writeValue(response.getWriter(), new ErrorMessage("Authentication failed", "", null));
     }
 
 
-    public void onAuthenticationFailure(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response, AuthenticationException e) {
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, Exception e) {
     }
 }
