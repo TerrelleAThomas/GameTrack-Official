@@ -28,6 +28,17 @@ public class FlagController {
             Flag createdFlag = flagService.createFlag(flag);
             return ResponseEntity.ok(createdFlag);
         } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating flag: " + e.getMessage());
+        }
+    }
+
+    // Note that the endpoint for flagging a comment has been changed to avoid mapping conflict
+    @PostMapping("/comment")
+    public ResponseEntity<?> flagComment(@RequestBody Long commentId) {
+        try {
+            String flag = flagService.flagComment(String.valueOf(commentId));
+            return ResponseEntity.ok(flag);
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error flagging comment: " + e.getMessage());
         }
     }
@@ -39,16 +50,6 @@ public class FlagController {
             return flag != null ? ResponseEntity.ok(flag) : ResponseEntity.notFound().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving flag: " + e.getMessage());
-        }
-    }
-
-    @PostMapping
-    public ResponseEntity<?> flagComment(@RequestBody Long commentId) {
-        try {
-            String flag = flagService.flagComment(String.valueOf(commentId));
-            return ResponseEntity.ok(flag);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error flagging comment: " + e.getMessage());
         }
     }
 

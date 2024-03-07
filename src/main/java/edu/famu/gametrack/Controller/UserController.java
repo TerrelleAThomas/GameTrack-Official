@@ -79,7 +79,7 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deactivateUser(@PathVariable("username") String username) {
         try {
-            boolean deactivated = userService.deactivateUserByUsername(username);
+            boolean deactivated = UserService.deactivateUserByUsername(username);
             if (!deactivated) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
             }
