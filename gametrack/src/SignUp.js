@@ -15,7 +15,7 @@ export default function SignupPage() {
             password,
         };
         try {
-            const response = await axios.post('http://localhost:8080/api/register', user);
+            const response = await axios.post('http://localhost:8080/api/user/create', user);
 
             if (response.status === 201) {
                 console.log('User signed up successfully');

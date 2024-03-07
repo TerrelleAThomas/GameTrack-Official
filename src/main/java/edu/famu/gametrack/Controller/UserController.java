@@ -22,6 +22,24 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<?> createUser(@RequestBody Map<String, String> userData) {
+        try {
+            User newUser = new User();
+            newUser.setUsername(userData.get("username"));
+            newUser.setPassword(userData.get("password"));
+            // Populate other fields as needed
+
+            String userId = userService.createUser(newUser);
+
+            return ResponseEntity.ok().body("User created successfully with ID: " + userId);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            logger.error("Error creating user", e);
+            return ResponseEntity.internalServerError().body("Error creating user: " + e.getMessage());
+        }
+    }
     @GetMapping("/search")
     public ResponseEntity<?> getUserByUsernameOrEmail(@RequestParam(name = "username", required = false) String username,
                                                       @RequestParam(name = "email", required = false) String email) {
