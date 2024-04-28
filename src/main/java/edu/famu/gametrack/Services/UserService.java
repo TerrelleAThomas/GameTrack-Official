@@ -19,12 +19,24 @@ public class UserService {
     }
 
     public String createUser(User user) throws ExecutionException, InterruptedException {
+        user.setCreatedAt(Timestamp.now());
+        // user.setLastLogin(Timestamp.now()); // You can uncomment this if you want to set last login time during user creation.
+
+        // Use 'firestore' directly here instead of 'db'
+        ApiFuture<DocumentReference> future = firestore.collection("User").add(user);
+        DocumentReference userRef = future.get();
+
+        return userRef.getId();
+    }
+
+
+    /*public String createUser(User user) throws ExecutionException, InterruptedException {
         // Assign roles based on criteria (isAdmin, isSiteAdmin)
         assignAdminRoles(user); // Assume this method sets the isAdmin and isSiteAdmin fields based on your criteria
         user.setCreatedAt(Timestamp.now());
         ApiFuture<DocumentReference> future = firestore.collection("User").add(user);
         return future.get().getId();
-    }
+    }*/
 
     private void assignAdminRoles(User user) {
         // Example logic to assign roles

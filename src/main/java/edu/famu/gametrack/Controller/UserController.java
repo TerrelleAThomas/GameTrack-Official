@@ -26,7 +26,7 @@ public class UserController {
     public ResponseEntity<?> createUser(@RequestBody Map<String, String> userData) {
         try {
             User newUser = new User();
-            newUser.setUsername(userData.get("username"));
+            newUser.setEmail(userData.get("email")); // Using email as the primary identifier
             newUser.setPassword(userData.get("password"));
             // Populate other fields as needed
 
